@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 // キャンペーン画像のパス
-const CAMPAIGN_IMAGE = "/images/ecobugcp.jpg";
+const CAMPAIGN_IMAGE = "/images/coupon.jpg";
 
 export default function CampaignPage() {
   const [isApplied, setIsApplied] = useState(false);
@@ -18,7 +18,7 @@ export default function CampaignPage() {
         onClick={() => !isApplied && setIsApplied(true)} // すでに応募済みなら変更不可
         disabled={isApplied} // ボタンを無効化
       >
-        {isApplied ? "応募済み" : "応募"}
+        {isApplied ? "使用済み" : "使用する"}
       </button>
     </div>
   );

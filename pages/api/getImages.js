@@ -7,7 +7,7 @@ export default function handler(req, res) {
 
   // `header.jpg` と `ecobugcp.JPG` を除外し、画像ファイルのみリスト化
   const imageFiles = files.filter(file =>
-    file !== "header.jpg" && file !== "ecobugcp.jpg" && /\.(jpg|jpeg|png|gif)$/i.test(file)
+    file !== "header.jpg" && file !== "ecobugcp.jpg"&& file !== "coupon.jpg" && /\.(jpg|jpeg|png|gif)$/i.test(file)
   );
 
   res.status(200).json(imageFiles.map(file => `/images/${file}`));
