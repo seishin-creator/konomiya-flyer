@@ -14,8 +14,6 @@ export default function Home() {
       try {
         const res = await fetch("/api/getImages");
         const data = await res.json();
-
-        // `fallback.jpg` を除外
         const filteredImages = data.filter(img => !img.includes("fallback.jpg"));
         setProductImages(filteredImages);
       } catch (error) {
@@ -24,6 +22,19 @@ export default function Home() {
     }
     fetchImages();
   }, []);
+
+  // 🟢 ページ読み込み時にカートのデータを復元
+  useEffect(() => {
+    const savedCart = localStorage.getItem("shoppingCart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart)); // 保存されたデータを復元
+    }
+  }, []);
+
+  // 🟢 カートが更新されたら `localStorage` に保存
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(cart));
+  }, [cart]);
 
   // カートに商品を追加/削除
   const toggleCartItem = (image) => {
@@ -38,7 +49,7 @@ export default function Home() {
     <div className="flex flex-col items-center w-full">
       {/* ヘッダー画像 */}
       <div className="fixed top-0 left-0 w-full bg-white z-50 shadow-md p-4 text-center">
-        <Image src={HEADER_IMAGE_URL} alt="マルミヤストア" width={600} height={200} />
+        <Image src={HEADER_IMAGE_URL} alt="コノミヤストア" width={600} height={200} />
       </div>
 
       {/* 商品画像リスト */}
@@ -106,3 +117,4 @@ export default function Home() {
     </div>
   );
 }
+
